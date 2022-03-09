@@ -1,10 +1,23 @@
 variables:
-  API_TOKEN: $DEPLOYMENT_TOKEN
-  APP_PATH: '$CI_PROJECT_DIR/'
-  OUTPUT_PATH: 'out'
+    APP_PATH: '$CI_PROJECT_DIR/'
+    OUTPUT_PATH: 'out'
 
-deploy:
+deploy-test:
+  variables:
+    API_TOKEN: $DEPLOYMENT_TOKEN_TEST
   stage: deploy
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "testing"'
   image: registry.gitlab.com/static-web-apps/azure-static-web-apps-deploy
   script:
-    - echo "App deployed successfully."
+    - echo "App deployed to www.test.aiwordle.com successfully."
+
+deploy-prod:
+  variables:
+    API_TOKEN: $DEPLOYMENT_TOKEN_PROD
+  stage: deploy
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  image: registry.gitlab.com/static-web-apps/azure-static-web-apps-deploy
+  script:
+    - echo "App deployed to www.aiwordle.com successfully."
