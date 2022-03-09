@@ -1,3 +1,4 @@
+import WordleForm from "./WordleForm";
 import WordleRow from "./WordleRow";
 
 export default function Game(props) {
@@ -5,6 +6,7 @@ export default function Game(props) {
   return (
     <div className="m-16 max-w-4xl">
       <div className="game-container bg-slate-300 p-12 rounded-xl drop-shadow-lg">
+        <WordleForm />
         {sampleData.history.map((row, rowNum) => (
           <WordleRow key={`row_${rowNum}`} rowNum={rowNum} letters={row.letters} />
         ))}
