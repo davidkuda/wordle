@@ -1,8 +1,11 @@
 export default function WordleLetter(props) {
   const letter = props.letter;
   return (
-    <div className="h-4/5 p-4 mx-2 my-2 w-1/5 bg-slate-400 shadow-lg rounded-lg">
-      <p className="text-white text-4xl md:text-8xl text-center">{letter}</p>
+    <div className="aspect-square p-1 m-0.5 md:p-4 bg-slate-400 shadow-lg rounded-lg">
+      {/* TODO: If state === 2 => ... etc. */}
+      <p className="text-white text-base sm:text-4xl md:text-8xl text-center">
+        {letter}
+      </p>
     </div>
   );
 }
