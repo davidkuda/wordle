@@ -3,6 +3,7 @@ import { useState } from "react";
 import Game from "../components/Game";
 import WordleForm from "../components/WordleForm";
 import NextButton from "../components/NextButton";
+import PlayAgainButton from "../components/PlayAgainButton";
 
 export default function Home() {
   const [gameData, setGameData] = useState();
@@ -43,6 +44,19 @@ export default function Home() {
     }
   }
 
+  function renderPlayAgainButton() {
+    function resetStates() {
+      setGameHasStarted(false);
+      setGameIsFinished(false);
+      setGameData(null);
+      setGameProgress([]);
+      setGameWon(null);
+    }
+    if (gameIsFinished) {
+      return <PlayAgainButton resetStates={resetStates} />;
+    }
+  }
+
   // TODO: Implement a win or loose screen when gameIsFinished and gameIsWon
 
   return (
@@ -53,6 +67,7 @@ export default function Home() {
       {renderForm()}
       {renderGame()}
       {renderNextButton()}
+      {renderPlayAgainButton()}
     </div>
   );
 }
