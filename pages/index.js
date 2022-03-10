@@ -6,7 +6,7 @@ import NextButton from "../components/NextButton";
 import PlayAgainButton from "../components/PlayAgainButton";
 
 export default function Home() {
-  const [gameData, setGameData] = useState();
+  const [gameData, setGameData] = useState([]);
   const [gameProgress, setGameProgress] = useState([]);
   const [gameHasStarted, setGameHasStarted] = useState(false);
   const [gameIsFinished, setGameIsFinished] = useState(false);
@@ -36,6 +36,10 @@ export default function Home() {
         />
       );
     }
+  }
+
+  if (gameData.length > 0 && gameProgress.length < 1) {
+    dequeueGameData();
   }
 
   // TODO: Implement a LoadScreen -- The API may take a couple of seconds to render!
