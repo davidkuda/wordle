@@ -38,6 +38,7 @@ export default function Home() {
           setGameData={setGameData}
           gameProgress={gameProgress}
           setGameProgress={setGameProgress}
+          setGameIsFinished={setGameIsFinished}
         />
       );
     }

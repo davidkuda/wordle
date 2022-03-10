@@ -1,5 +1,9 @@
 export default function NextButton(props) {
   function handleClick(event) {
+    if (props.gameData.length == 0) {
+      console.log("Game Is Over!");
+      return props.setGameIsFinished(true);
+    }
     let tempGameData = [...props.gameData];
     let row = tempGameData.shift();
     props.setGameData(tempGameData);
