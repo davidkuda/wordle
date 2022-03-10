@@ -43,6 +43,8 @@ export default function Home() {
     }
   }
 
+  // TODO: Implement a win or loose screen when gameIsFinished and gameIsWon
+
   return (
     <div className="m-16 max-w-4xl">
       <h1 className="text-base md:text-3xl font-medium text-center drop-shadow">
