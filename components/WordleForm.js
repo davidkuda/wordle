@@ -1,13 +1,25 @@
 import { useState } from "react";
 import wordList from "../public/wordle_words.json";
 
-export default function FuncForm() {
+export default function FuncForm(props) {
   const [error, setError] = useState(null);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const userInput = event.target.elements.word.value;
-    // TODO: Do something with the userInput !
+
+    async function fetchData(word) {
+      const response = await fetch(
+        `https://wordlapp.azurewebsites.net/v2/game?action=hi&word=${word}`
+      );
+      const data = await response.json();
+      return data;
+    }
+
+    const gameData = await fetchData(userInput);
+    props.setGameData(gameData.history);
+    props.setGameWon(gameData["game_won"]);
+    props.setGameHasStarted(true);
   }
 
   function handleChange(event) {
@@ -50,8 +62,8 @@ export default function FuncForm() {
           <button
             disabled={Boolean(error)}
             className={
-              "flex-shrink-0 bg-gray-500  border-gray-500 text-sm border-4 text-white py-1 px-2 rounded"
-              + (Boolean(error)? "" : " hover:bg-gray-700 hover:border-gray-700")
+              "flex-shrink-0 bg-gray-500  border-gray-500 text-sm border-4 text-white py-1 px-2 rounded" +
+              (Boolean(error) ? "" : " hover:bg-gray-700 hover:border-gray-700")
             }
             type="submit"
           >
