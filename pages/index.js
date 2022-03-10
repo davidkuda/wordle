@@ -4,6 +4,7 @@ import Game from "../components/Game";
 import WordleForm from "../components/WordleForm";
 import NextButton from "../components/NextButton";
 import PlayAgainButton from "../components/PlayAgainButton";
+import WinLoseNotification from "../components/WinLoseNotification";
 
 export default function Home() {
   const [gameData, setGameData] = useState([]);
@@ -56,6 +57,12 @@ export default function Home() {
     }
   }
 
+  function renderWinLoseNotification() {
+    if (gameIsFinished) {
+      return <WinLoseNotification gameWon={gameWon} />;
+    }
+  }
+
   function renderPlayAgainButton() {
     function resetStates() {
       setGameHasStarted(false);
@@ -69,8 +76,6 @@ export default function Home() {
     }
   }
 
-  // TODO: Implement a win or loose screen when gameIsFinished and gameIsWon
-
   return (
     <div className="flex flex-col">
       <h1 className="text-base md:text-3xl my-6 font-medium drop-shadow text-center">
@@ -79,6 +84,7 @@ export default function Home() {
       {renderForm()}
       {renderGame()}
       {renderNextButton()}
+      {renderWinLoseNotification()}
       {renderPlayAgainButton()}
     </div>
   );
