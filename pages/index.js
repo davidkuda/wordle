@@ -46,8 +46,8 @@ export default function Home() {
   // TODO: Implement a win or loose screen when gameIsFinished and gameIsWon
 
   return (
-    <div className="m-16 max-w-4xl">
-      <h1 className="text-base md:text-3xl font-medium text-center drop-shadow">
+    <div className="flex flex-col">
+      <h1 className="text-base md:text-3xl my-6 font-medium drop-shadow text-center">
         Play Wordle with an AI
       </h1>
       {renderForm()}
