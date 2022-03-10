@@ -5,7 +5,6 @@ import WordleForm from "../components/WordleForm";
 import NextButton from "../components/NextButton";
 
 export default function Home() {
-  const [component, setComponent] = useState();
   const [gameData, setGameData] = useState();
   const [gameProgress, setGameProgress] = useState([]);
   const [gameHasStarted, setGameHasStarted] = useState(false);
