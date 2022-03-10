@@ -1,8 +1,15 @@
 import { useState } from "react";
 import wordList from "../public/wordle_words.json";
+import { useKeyPress } from "../lib/custom_hooks/useKeyPress";
 
 export default function FuncForm(props) {
   const [error, setError] = useState(null);
+
+  const tabPress = useKeyPress("tab");
+
+  if (tabPress) {
+    document.getElementById("word").focus();
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -57,6 +64,7 @@ export default function FuncForm(props) {
             placeholder="Enter a word"
             aria-label="Word"
             onChange={handleChange}
+            autoFocus
           ></input>
           <button
             disabled={Boolean(error)}
