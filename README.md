@@ -1,4 +1,5 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Play Wordle with an AI
+![Screenshot of the Frontend](https://github.com/davidkuda/media/blob/main/ai-wordle/ai-wordle.png)
 
 ## Getting Started
 
