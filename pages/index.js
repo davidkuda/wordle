@@ -24,6 +24,8 @@ export default function Home() {
     }
   }
 
+  // TODO: Implement a LoadScreen -- The API may take a couple of seconds to render!
+
   function renderGame() {
     if (gameHasStarted) {
       return <Game gameProgress={gameProgress} />;
