@@ -12,6 +12,20 @@ export default function Home() {
   const [gameIsFinished, setGameIsFinished] = useState(false);
   const [gameWon, setGameWon] = useState();
 
+  function dequeueGameData() {
+    let tempGameData = [...gameData];
+    let row = tempGameData.shift();
+    setGameData(tempGameData);
+    let tempProgress = [...gameProgress];
+    tempProgress.push(row);
+    setGameProgress(tempProgress);
+
+    if (tempGameData.length === 0) {
+      console.log("Game Is Over!");
+      return setGameIsFinished(true);
+    }
+  }
+
   function renderForm() {
     if (!gameHasStarted) {
       return (
@@ -34,15 +48,7 @@ export default function Home() {
 
   function renderNextButton() {
     if (gameHasStarted && !gameIsFinished) {
-      return (
-        <NextButton
-          gameData={gameData}
-          setGameData={setGameData}
-          gameProgress={gameProgress}
-          setGameProgress={setGameProgress}
-          setGameIsFinished={setGameIsFinished}
-        />
-      );
+      return <NextButton dequeueGameData={dequeueGameData} />;
     }
   }
 

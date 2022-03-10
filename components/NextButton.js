@@ -1,16 +1,6 @@
-export default function NextButton(props) {
+export default function NextButton({dequeueGameData}) {
   function handleClick(event) {
-    let tempGameData = [...props.gameData];
-    let row = tempGameData.shift();
-    props.setGameData(tempGameData);
-    let tempProgress = [...props.gameProgress];
-    tempProgress.push(row);
-    props.setGameProgress(tempProgress);
-
-    if (tempGameData.length === 0) {
-      console.log("Game Is Over!");
-      return props.setGameIsFinished(true);
-    }
+    dequeueGameData();
   }
 
   return (
