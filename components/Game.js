@@ -11,8 +11,8 @@ export default function Game(props) {
   }
 
   return (
-    <div className="m-16 max-w-4xl">
-      <div className="game-container bg-slate-300 p-12 rounded-xl drop-shadow-lg">
+    <div className="flex items-center justify-center">
+      <div className="grid grid-cols-5 md:text-4xl sm:text-xl xs:text-sm gap-4 text-gray-100 font-bold">
         {renderRows(props.gameProgress)}
       </div>
     </div>

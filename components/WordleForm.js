@@ -47,7 +47,7 @@ export default function FuncForm(props) {
       <form
         autoComplete="off"
         onSubmit={handleSubmit}
-        className="text-2xl flex justify-center items-center py-3"
+        className="text-2xl flex justify-center items-center my-6"
       >
         <div className="flex justify-center items-center border-b border-gray-500 py-2">
           <input

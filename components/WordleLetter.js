@@ -1,11 +1,24 @@
 export default function WordleLetter(props) {
   const letter = props.letter;
+  const state = props.state;
+  var bgClass = null;
+
+  if (state == "isWrongLetter") {
+    bgClass = "bg-gray-500";
+  } else if (state == "isCorrectLetter") {
+    bgClass = "bg-yellow-600";
+  } else if (state == "isCorrectPosition") {
+    bgClass = "bg-green-700";
+  }
+
   return (
-    <div className="aspect-square p-1 m-0.5 md:p-4 bg-slate-400 shadow-lg rounded-lg">
-      {/* TODO: If state === 2 => ... etc. */}
-      <p className="text-white text-base sm:text-4xl md:text-8xl text-center">
-        {letter}
-      </p>
+    <div
+      className={
+        "flex items-center justify-center md:w-16 md:h-16 sm:w-12 sm:h-12 w-8 h-8 " +
+        bgClass
+      }
+    >
+      {letter}
     </div>
   );
 }
