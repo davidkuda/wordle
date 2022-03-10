@@ -9,9 +9,8 @@ export default function FuncForm(props) {
     const userInput = event.target.elements.word.value;
 
     async function fetchData(word) {
-      const response = await fetch(
-        `https://wordlapp.azurewebsites.net/v2/game?action=hi&word=${word}`
-      );
+      const url = `https://wordlapp.azurewebsites.net/v1/game?word=${word}`;
+      const response = await fetch(url);
       const data = await response.json();
       return data;
     }
