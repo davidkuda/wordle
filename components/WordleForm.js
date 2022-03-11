@@ -20,6 +20,7 @@ export default function FuncForm(props) {
     event.preventDefault();
     const userInput = event.target.elements.word.value;
     setIsLoading(true);
+    props.setYourWord(userInput.toUpperCase());
 
     async function fetchData(word) {
       const url = `https://wordlapp.azurewebsites.net/v1/game?word=${word}`;

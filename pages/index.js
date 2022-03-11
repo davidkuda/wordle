@@ -38,6 +38,7 @@ export default function Home() {
           setGameData={setGameData}
           setGameWon={setGameWon}
           setApiError={setApiError}
+          setYourWord={setYourWord}
         />
       );
     }
@@ -52,7 +53,16 @@ export default function Home() {
     dequeueGameData();
   }
 
-  // TODO: Implement a LoadScreen -- The API may take a couple of seconds to render!
+  const renderYourWord = (
+    <div className="m-8 mx-4 md:mx-12 flex flex-col items-center">
+      <div className="prose w-4/5 md:w-3/5">
+        <p className="text-center text-xl">
+          Your word is <span className="font-bold">{yourWord}.</span> <br />
+          Will the AI guess it?
+        </p>
+      </div>
+    </div>
+  );
 
   function renderGame() {
     if (!apiError && gameHasStarted) {
@@ -90,6 +100,7 @@ export default function Home() {
       setGameProgress([]);
       setGameWon(null);
       setApiError(false);
+      setYourWord("");
     }
     if (apiError || gameIsFinished) {
       return <PlayAgainButton resetStates={resetStates} />;
@@ -103,6 +114,7 @@ export default function Home() {
         <h1 className="text-3xl my-6 font-medium drop-shadow text-center">
           Play Wordle with our AI
         </h1>
+        {yourWord && renderYourWord}
         {renderForm()}
         {renderGame()}
         {renderNextButton()}
