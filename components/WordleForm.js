@@ -6,12 +6,12 @@ export default function FuncForm(props) {
   const [isEmpty, setIsEmpty] = useState(true);
   const [isFiveChars, setIsFiveChars] = useState(false);
   const [isInDict, setIsInDict] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [enableButton, setEnableButton] = useState(false);
 
   const tabPress = useKeyPress("tab");
-
+// 
   if (tabPress) {
     document.getElementById("word").focus();
   }
@@ -60,20 +60,14 @@ export default function FuncForm(props) {
         setErrorMsg("Word is not in our English Dictionary!");
       }
     }
+  }
+
+  function handleKeyUp() {
     if (!isEmpty && isFiveChars && isInDict && !isLoading) {
-      console.log("enable me !");
       setEnableButton(true);
     } else {
-      console.log("Disable me !");
       setEnableButton(false);
     }
-
-    console.log("states:");
-    console.log({ isEmpty });
-    console.log({ isFiveChars });
-    console.log({ isInDict });
-    console.log({ isLoading });
-    console.log({ enableButton });
   }
 
   const button = (
@@ -87,7 +81,7 @@ export default function FuncForm(props) {
       }
       type="submit"
     >
-      {"Start"}
+      Start
     </button>
   );
 
@@ -128,6 +122,7 @@ export default function FuncForm(props) {
             placeholder="Enter a word"
             aria-label="Word"
             onChange={handleChange}
+            onKeyUp={handleKeyUp}
             autoFocus
           ></input>
           {isLoading ? loader : button}
