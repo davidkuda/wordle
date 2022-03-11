@@ -11,7 +11,7 @@ export default function FuncForm(props) {
   const [enableButton, setEnableButton] = useState(false);
 
   const tabPress = useKeyPress("tab");
-// 
+
   if (tabPress) {
     document.getElementById("word").focus();
   }
@@ -141,6 +141,34 @@ export default function FuncForm(props) {
           {isLoading ? loader : button}
         </div>
       </form>
+      <div className="mt-8 mx-4 md:mx-12 flex flex-col items-center">
+        <div className="prose w-4/5 md:w-3/5">
+          <p>
+            Give our AI a five-letter word and it will try to guess it in max 6
+            tries. With each guess, the AI will learn these things:
+          </p>
+          <ul>
+            <li>
+              <span className="text-green-700">
+                <b>green: </b>
+              </span>
+              If a letter is correct and in the correct position
+            </li>
+            <li>
+              <span className="text-yellow-600">
+                <b>yellow: </b>
+              </span>
+              If a letter is correct but in the wrong position
+            </li>
+            <li>
+              <span className="text-gray-500">
+                <b>gray: </b>
+              </span>
+              If a letter is wrong
+            </li>
+          </ul>
+        </div>
+      </div>
     </>
   );
 }
