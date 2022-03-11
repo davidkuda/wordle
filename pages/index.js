@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import Head from "../components/Head";
 import Game from "../components/Game";
 import WordleForm from "../components/WordleForm";
 import NextButton from "../components/NextButton";
@@ -73,7 +74,9 @@ export default function Home() {
   function renderApiError() {
     if (apiError) {
       return (
-        <p className="text-2xl text-red-600 text-center mt-8 mx-12">{apiError}</p>
+        <p className="text-2xl text-red-600 text-center mt-8 mx-12">
+          {apiError}
+        </p>
       );
     }
   }
@@ -93,18 +96,19 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col">
-      <h1 className="text-base md:text-3xl my-6 font-medium drop-shadow text-center">
-        Play Wordle with an AI
-      </h1>
-      {renderForm()}
-      {renderGame()}
-      {renderNextButton()}
-      {renderWinLoseNotification()}
-
-      {renderApiError()}
-
-      {renderPlayAgainButton()}
-    </div>
+    <>
+      <Head />
+      <div className="flex flex-col">
+        <h1 className="text-base md:text-3xl my-6 font-medium drop-shadow text-center">
+          Play Wordle with an AI
+        </h1>
+        {renderForm()}
+        {renderGame()}
+        {renderNextButton()}
+        {renderWinLoseNotification()}
+        {renderApiError()}
+        {renderPlayAgainButton()}
+      </div>
+    </>
   );
 }
