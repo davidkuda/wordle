@@ -39,7 +39,7 @@ export default function Home() {
     }
   }
 
-  if (gameData.length > 0 && gameProgress.length < 1) {
+  if (gameData !== null && gameData.length > 0 && gameProgress.length < 1) {
     dequeueGameData();
   }
 
