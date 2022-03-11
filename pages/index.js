@@ -73,7 +73,7 @@ export default function Home() {
   function renderApiError() {
     if (apiError) {
       return (
-        <p className="text-2xl text-red-600 text-center mt-8">{apiError}</p>
+        <p className="text-2xl text-red-600 text-center mt-8 mx-12">{apiError}</p>
       );
     }
   }
