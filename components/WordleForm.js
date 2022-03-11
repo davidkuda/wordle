@@ -120,7 +120,6 @@ export default function FuncForm(props) {
 
   return (
     <>
-      <p className="text-red-600 text-center">{errorMsg}</p>
       <form
         autoComplete="off"
         onSubmit={handleSubmit}
@@ -141,6 +140,7 @@ export default function FuncForm(props) {
           {isLoading ? loader : button}
         </div>
       </form>
+      <p className="text-red-600 text-center">{errorMsg}</p>
       <div className="mt-8 mx-4 md:mx-12 flex flex-col items-center">
         <div className="prose w-4/5 md:w-3/5">
           <p>
