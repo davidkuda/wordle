@@ -12,6 +12,7 @@ export default function Home() {
   const [gameHasStarted, setGameHasStarted] = useState(false);
   const [gameIsFinished, setGameIsFinished] = useState(false);
   const [gameWon, setGameWon] = useState();
+  const [apiError, setApiError] = useState(false);
 
   function dequeueGameData() {
     let tempGameData = [...gameData];
@@ -28,38 +29,52 @@ export default function Home() {
   }
 
   function renderForm() {
-    if (!gameHasStarted) {
+    if (!apiError && !gameHasStarted) {
       return (
         <WordleForm
           setGameHasStarted={setGameHasStarted}
           setGameData={setGameData}
           setGameWon={setGameWon}
+          setApiError={setApiError}
         />
       );
     }
   }
 
-  if (gameData !== null && gameData.length > 0 && gameProgress.length < 1) {
+  if (
+    !apiError &&
+    gameData !== null &&
+    gameData.length > 0 &&
+    gameProgress.length < 1
+  ) {
     dequeueGameData();
   }
 
   // TODO: Implement a LoadScreen -- The API may take a couple of seconds to render!
 
   function renderGame() {
-    if (gameHasStarted) {
+    if (!apiError && gameHasStarted) {
       return <Game gameProgress={gameProgress} />;
     }
   }
 
   function renderNextButton() {
-    if (gameHasStarted && !gameIsFinished) {
+    if (!apiError && gameHasStarted && !gameIsFinished) {
       return <NextButton dequeueGameData={dequeueGameData} />;
     }
   }
 
   function renderWinLoseNotification() {
-    if (gameIsFinished) {
+    if (!apiError && gameIsFinished) {
       return <WinLoseNotification gameWon={gameWon} />;
+    }
+  }
+
+  function renderApiError() {
+    if (apiError) {
+      return (
+        <p className="text-2xl text-red-600 text-center mt-8">{apiError}</p>
+      );
     }
   }
 
@@ -70,8 +85,9 @@ export default function Home() {
       setGameData(null);
       setGameProgress([]);
       setGameWon(null);
+      setApiError(false);
     }
-    if (gameIsFinished) {
+    if (apiError || gameIsFinished) {
       return <PlayAgainButton resetStates={resetStates} />;
     }
   }
@@ -85,6 +101,9 @@ export default function Home() {
       {renderGame()}
       {renderNextButton()}
       {renderWinLoseNotification()}
+
+      {renderApiError()}
+
       {renderPlayAgainButton()}
     </div>
   );
