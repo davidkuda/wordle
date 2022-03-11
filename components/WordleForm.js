@@ -29,9 +29,22 @@ export default function FuncForm(props) {
     }
 
     const gameData = await fetchData(userInput);
-    props.setGameData(gameData.history);
-    props.setGameWon(gameData["game_won"]);
-    props.setGameHasStarted(true);
+
+    if (gameData.hasOwnProperty("error") == true) {
+      // backend returns error which is an expected outcome
+      props.setApiError(
+        "Oh no, we cannot process this word. Please refresh or hit the button and try a different one!"
+      );
+    } else if (gameData.hasOwnProperty("history") == false) {
+      // backend returns different data than expected
+      props.setApiError(
+        "Oh no, something went wrong. Please refresh or hit the button and try a different one!"
+      );
+    } else {
+      props.setGameData(gameData.history);
+      props.setGameWon(gameData["game_won"]);
+      props.setGameHasStarted(true);
+    }
   }
 
   function handleChange(event) {
