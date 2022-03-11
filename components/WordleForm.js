@@ -32,7 +32,7 @@ export default function FuncForm(props) {
 
   function handleChange(event) {
     const { value } = event.target;
-    var isInDictionary = wordList.includes(value);
+    var isInDictionary = wordList.includes(value.toLowerCase());
     var isLessThenFiveChars = value.length < 5;
     var isMoreThanFiveChars = value.length > 5;
     var isFiveChars = value.length === 5;
