@@ -70,7 +70,7 @@ export default function FuncForm(props) {
         setIsInDict(true);
       } else {
         setIsInDict(false);
-        setErrorMsg("Word is not in our English Dictionary!");
+        setErrorMsg("Your word is not in our English Dictionary!");
       }
     }
   }
