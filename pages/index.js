@@ -99,7 +99,7 @@ export default function Home() {
     <>
       <Head />
       <div className="flex flex-col">
-        <h1 className="text-base md:text-3xl my-6 font-medium drop-shadow text-center">
+        <h1 className="text-3xl my-6 font-medium drop-shadow text-center">
           Play Wordle with an AI
         </h1>
         {renderForm()}
