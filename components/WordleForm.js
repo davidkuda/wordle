@@ -4,8 +4,11 @@ import { useKeyPress } from "../lib/custom_hooks/useKeyPress";
 
 export default function FuncForm(props) {
   const [isEmpty, setIsEmpty] = useState(true);
-  const [error, setError] = useState(null);
+  const [isFiveChars, setIsFiveChars] = useState(false);
+  const [isInDict, setIsInDict] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [enableButton, setEnableButton] = useState(false);
 
   const tabPress = useKeyPress("tab");
 
@@ -34,35 +37,53 @@ export default function FuncForm(props) {
   function handleChange(event) {
     const { value } = event.target;
 
-    if (value > 0) {
+    if (value.length > 0) {
       setIsEmpty(false);
+    } else {
+      setIsEmpty(true);
     }
 
-    var isInDictionary = wordList.includes(value.toLowerCase());
-    var isLessThenFiveChars = value.length < 5;
-    var isMoreThanFiveChars = value.length > 5;
-    var isFiveChars = value.length === 5;
-
-    if (isLessThenFiveChars || isMoreThanFiveChars) {
-      setError("Your word must have exactly five characters.");
+    if (value.length === 5) {
+      setIsFiveChars(true);
+      setErrorMsg("");
+      checkIsInDictionary();
+    } else {
+      setIsFiveChars(false);
+      setErrorMsg("Your word must have exactly five characters.");
     }
 
-    if (isFiveChars) {
-      setError();
+    function checkIsInDictionary() {
+      if (wordList.includes(value.toLowerCase())) {
+        setIsInDict(true);
+      } else {
+        setIsInDict(false);
+        setErrorMsg("Word is not in our English Dictionary!");
+      }
+    }
+    if (!isEmpty && isFiveChars && isInDict && !isLoading) {
+      console.log("enable me !");
+      setEnableButton(true);
+    } else {
+      console.log("Disable me !");
+      setEnableButton(false);
     }
 
-    if (isFiveChars && !isInDictionary) {
-      setError("Word is not in our English Dictionary!");
-    }
+    console.log("states:");
+    console.log({ isEmpty });
+    console.log({ isFiveChars });
+    console.log({ isInDict });
+    console.log({ isLoading });
+    console.log({ enableButton });
   }
 
-  const disableButton = (Boolean(error) || isLoading || isEmpty)
   const button = (
     <button
-      disabled={disableButton}
+      disabled={!enableButton}
       className={
-        "flex-shrink-0 bg-gray-500  border-gray-500 text-sm border-4 text-white py-1 px-2 rounded" +
-        (disableButton ? "" : " hover:bg-gray-700 hover:border-gray-700")
+        "flex-shrink-0 border-none text-sm border-4 text-white py-1 px-2 rounded " +
+        (enableButton
+          ? "bg-gray-500 hover:bg-gray-700 hover:border-gray-700"
+          : "bg-gray-200")
       }
       type="submit"
     >
@@ -92,6 +113,7 @@ export default function FuncForm(props) {
 
   return (
     <>
+      <p className="text-red-600 text-center">{errorMsg}</p>
       <form
         autoComplete="off"
         onSubmit={handleSubmit}
@@ -108,10 +130,9 @@ export default function FuncForm(props) {
             onChange={handleChange}
             autoFocus
           ></input>
-          {isLoading? loader : button}
+          {isLoading ? loader : button}
         </div>
       </form>
-      <p className="text-red-600 text-center">{error}</p>
     </>
   );
 }
