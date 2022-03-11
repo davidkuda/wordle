@@ -3,6 +3,7 @@ import wordList from "../public/wordle_words.json";
 import { useKeyPress } from "../lib/custom_hooks/useKeyPress";
 
 export default function FuncForm(props) {
+  const [isEmpty, setIsEmpty] = useState(true);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,6 +33,11 @@ export default function FuncForm(props) {
 
   function handleChange(event) {
     const { value } = event.target;
+
+    if (value > 0) {
+      setIsEmpty(false);
+    }
+
     var isInDictionary = wordList.includes(value.toLowerCase());
     var isLessThenFiveChars = value.length < 5;
     var isMoreThanFiveChars = value.length > 5;
@@ -50,12 +56,13 @@ export default function FuncForm(props) {
     }
   }
 
+  const disableButton = (Boolean(error) || isLoading || isEmpty)
   const button = (
     <button
-      disabled={Boolean(error) || isLoading}
+      disabled={disableButton}
       className={
         "flex-shrink-0 bg-gray-500  border-gray-500 text-sm border-4 text-white py-1 px-2 rounded" +
-        (Boolean(error) ? "" : " hover:bg-gray-700 hover:border-gray-700")
+        (disableButton ? "" : " hover:bg-gray-700 hover:border-gray-700")
       }
       type="submit"
     >
