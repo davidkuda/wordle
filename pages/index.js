@@ -8,6 +8,7 @@ import PlayAgainButton from "../components/PlayAgainButton";
 import WinLoseNotification from "../components/WinLoseNotification";
 
 export default function Home() {
+  const [yourWord, setYourWord] = useState("");
   const [gameData, setGameData] = useState([]);
   const [gameProgress, setGameProgress] = useState([]);
   const [gameHasStarted, setGameHasStarted] = useState(false);
@@ -100,7 +101,7 @@ export default function Home() {
       <Head />
       <div className="flex flex-col">
         <h1 className="text-3xl my-6 font-medium drop-shadow text-center">
-          Play Wordle with an AI
+          Play Wordle with our AI
         </h1>
         {renderForm()}
         {renderGame()}
